@@ -1,10 +1,12 @@
 import { Response, Request } from 'express';
 import game from '../models/game';
 import schools from '../models/school'
+import cataloggames from '../models/cataloggame'
+
 
 export const createGame = async (req: Request, res: Response) => {
     try {
-        const { name, age, grade, hit, failure, note, score, playingTime, idSchool } = req.body;
+        const { name, age, grade, hit, failure, note, score, playingTime, idSchool, idGame } = req.body;
         const newGame = await game.create({
             name,
             age,
@@ -14,7 +16,8 @@ export const createGame = async (req: Request, res: Response) => {
             note,
             score,
             playingTime,
-            idSchool
+            idSchool,
+            idGame
         });
         res.status(200).json({
             msg: 'Juego creado exitosamente',
@@ -31,10 +34,14 @@ export const createGame = async (req: Request, res: Response) => {
 export const getAllGames = async (req: Request, res: Response) => {
     try {
         const games = await game.findAll({
-            attributes: ['id', 'name', 'age', 'grade',"hit", "failure", "note", 'score', 'playingTime', 'idSchool'], 
+            attributes: ['id', 'name', 'age', 'grade',"hit", "failure", "note", 'score', 'playingTime', 'idSchool', 'idGame'], 
             include: [
                 {
                     model: schools,
+                    attributes: ['name'] 
+                },
+                {
+                    model: cataloggames,
                     attributes: ['name'] 
                 }
             ]

@@ -1,6 +1,7 @@
 import {  DataTypes } from 'sequelize';
 import db from '../db/connection';
 import schools from './school'
+import cataloggames from './cataloggame'
 
 const games = db.define('game',{
     name: {
@@ -34,6 +35,9 @@ const games = db.define('game',{
 
 games.belongsTo( schools, {
     foreignKey: 'idSchool'
+})
+games.belongsTo( cataloggames, {
+    foreignKey: 'idGame'
 })
 
 export default games
