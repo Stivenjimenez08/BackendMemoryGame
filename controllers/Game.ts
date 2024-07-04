@@ -6,7 +6,7 @@ import cataloggames from '../models/cataloggame'
 
 export const createGame = async (req: Request, res: Response) => {
     try {
-        const { name, age, grade, hit, failure, note, score, playingTime, idSchool, idGame } = req.body;
+        const { name, age, grade, hit, failure, note, score, playingTime, idSchool} = req.body;
         const newGame = await game.create({
             name,
             age,
@@ -16,8 +16,7 @@ export const createGame = async (req: Request, res: Response) => {
             note,
             score,
             playingTime,
-            idSchool,
-            idGame
+            idSchool
         });
         res.status(200).json({
             msg: 'Juego creado exitosamente',
