@@ -30,6 +30,9 @@ const games = db.define('game',{
     },
     idSchool:{
         type: DataTypes.BIGINT
+    },
+    idGame:{
+        type: DataTypes.BIGINT
     }
 })
 
